@@ -11,24 +11,14 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [
-        'rbac' => [
-            'class' => 'backend\modules\rbac\Module',
-        ],
-        'srbac' => [
-            'class' => 'backend\modules\srbac\SrbacModule',
-        ],
-    ],
+    'modules' => [],
     'components' => [
-        'authManager' => [
-            'class' => '\yii\rbac\DbManager',
-        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
         'log' => [
-            //'traceLevel' => YII_DEBUG ? 3 : 0,
+            'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',

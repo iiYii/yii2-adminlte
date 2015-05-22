@@ -1,7 +1,12 @@
 {
     "name": "yiisoft/yii2-app-advanced",
     "description": "Yii 2 Advanced Application Template",
-    "keywords": ["yii2", "framework", "advanced", "application template"],
+    "keywords": [
+        "yii2",
+        "framework",
+        "advanced",
+        "application template"
+    ],
     "homepage": "http://www.yiiframework.com/",
     "type": "project",
     "license": "BSD-3-Clause",
@@ -19,7 +24,6 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "rmrevin/yii2-fontawesome": "*",
-        "mdmsoft/yii2-admin": "~1.0",
         "bower-asset/Ionicons": "*",
         "bower-asset/AdminLTE": "*"
     },
@@ -32,10 +36,33 @@
     "config": {
         "process-timeout": 1800
     },
+    "autoload": {
+        "psr-4": { "common\\": "common" }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "yii\\composer\\Installer::postCreateProject"
+        ],
+        "post-install-cmd": [
+            "common\\components\\ComposerInstaller::initProject"
+        ],
+        "post-update-cmd": [
+            "common\\components\\ComposerInstaller::initProject"
+        ]
+    },
     "extra": {
         "asset-installer-paths": {
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
         }
-    }
+    },
+    "repositories": [
+        {
+            "packagist": false
+        },
+        {
+            "type": "composer",
+            "url": "http://composer-proxy.jp/proxy/packagist"
+        }
+    ]
 }
