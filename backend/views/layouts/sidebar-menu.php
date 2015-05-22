@@ -20,7 +20,6 @@ echo Menu::widget(
                 'options' => [
                     'class' => 'treeview',
                 ],
-                'visible' => Yii::$app->user->can('readPost'),
                 'items' => [
                     [
                         'label' => Yii::t('app', 'Basic'),

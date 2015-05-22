@@ -19,9 +19,9 @@ class ComposerInstaller extends Installer
     {
         $composer = $event->getComposer();
         $extra = $composer->getPackage()->getExtra();
-        if (isset($extra['asset-installer-paths']['bower-asset-library'])){
+        if (isset($extra['asset-installer-paths']['bower-asset-library'])) {
             $bowerAssetDir = $extra['asset-installer-paths']['bower-asset-library'];
-            $cssFile = rtrim($bowerAssetDir, '/') . '/adminlte/css/AdminLTE.css';
+            $cssFile = rtrim($bowerAssetDir, '/') . '/adminlte/dist/css/AdminLTE.css';
             if (file_exists($cssFile)) {
                 $content = file_get_contents($cssFile);
                 $regexp = '/(@import) (url)\(([^>]*?)\);/';

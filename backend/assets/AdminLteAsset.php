@@ -11,17 +11,20 @@ use yii\web\AssetBundle;
 
 class AdminLteAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/bower/adminlte/dist';
+    public $sourcePath = '@vendor/bower/adminlte';
     public $css = [
-        'css/AdminLTE.min.css',
-        'css/skins/_all-skins.min.css'
+        'dist/css/AdminLTE.css',
+        'plugins/morris/morris.css',
+        'dist/css/skins/_all-skins.min.css'
     ];
     public $js = [
-        'js/app.min.js'
+        'plugins/morris/morris.js',
+        'plugins/iCheck/icheck.js',
+        'plugins/slimScroll/jquery.slimscroll.js',
+        'dist/js/app.js'
     ];
     public $depends = [
+        'backend\assets\AppAsset',
         'rmrevin\yii\fontawesome\AssetBundle',
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
     ];
 }
