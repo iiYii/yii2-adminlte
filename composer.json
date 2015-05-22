@@ -19,6 +19,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "rmrevin/yii2-fontawesome": "*",
+        "mdmsoft/yii2-admin": "~1.0",
+        "bower-asset/Ionicons": "*",
         "bower-asset/AdminLTE": "*"
     },
     "require-dev": {

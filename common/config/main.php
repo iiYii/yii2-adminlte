@@ -8,21 +8,21 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-            'itemTable' => 'auth_item',
-            'assignmentTable' => 'auth_assignment',
-            'itemChildTable' => 'auth_item_child',
-            //'defaultRoles' => ['guest'],
-        ],
+        //'authManager' => [
+        //    'class' => 'yii\rbac\DbManager',
+        //    'itemTable' => 'auth_item',
+        //    'assignmentTable' => 'auth_assignment',
+        //    'itemChildTable' => 'auth_item_child',
+        //    //'defaultRoles' => ['guest'],
+        //],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             //'enableStrictParsing' => true,
             'rules' => [
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                //'<controller:\w+>/<id:\d+>' => '<controller>/view',
+                //'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                //'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],
         'i18n' => [

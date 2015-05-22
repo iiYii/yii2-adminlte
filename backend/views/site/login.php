@@ -9,21 +9,17 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                <?= $form->field($model, 'username') ?>
-                <?= $form->field($model, 'password')->passwordInput() ?>
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-            <?php ActiveForm::end(); ?>
-        </div>
+<div class="login-box-body">
+    <div class="login-box-msg"><?php echo Html::encode($this->title); ?></div>
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="body">
+        <?= $form->field($model, 'username')->textInput(['placeholder' => $model->getAttributeLabel('username')])->label(false) ?>
+        <?= $form->field($model, 'password')->passwordInput(['placeholder' => $model->getAttributeLabel('password')])->label(false) ?>
+        <?= $form->field($model, 'rememberMe')->checkbox() ?>
     </div>
+    <div class="footer">
+        <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn bg-olive btn-block']) ?>
+    </div>
+    <?php ActiveForm::end(); ?>
 </div>

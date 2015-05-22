@@ -6,6 +6,7 @@ use common\widgets\Alert;
 /* @var $content string */
 
 \backend\assets\AdminLteAsset::register($this);
+\backend\assets\BowerAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -17,11 +18,16 @@ use common\widgets\Alert;
 
 
 </head>
-<body class="bg-white" style="min-height: 790px">
-<?php $this->beginBody() ?>
-<?= Alert::widget() ?>
-<?= $content ?>
-<?php $this->endBody() ?>
+<body class="login-page" style="min-height: 790px">
+    <?php $this->beginBody() ?>
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="../../index2.html"><b>Admin</b>LTE</a>
+            </div>
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </div>
+    <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
