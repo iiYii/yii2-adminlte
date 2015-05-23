@@ -1,10 +1,13 @@
-<?php 
+<?php
 
 namespace backend\modules\srbac\controllers;
 
 use backend\modules\srbac\helpers\Pinyin;
+use backend\modules\srbac\models\AuthItem;
+use backend\modules\srbac\models\AuthItemSearch;
 use Yii;
 use common\models\User;
+use yii\rbac\Role;
 
 
 class RoleController extends SrbacController
@@ -24,10 +27,58 @@ class RoleController extends SrbacController
 	 */
 	public function actionIndex()
 	{
+        $roles = $this->auth->getRoles();
+        $rules = $this->auth->getRules();
+
+        $searchModel = new AuthItemSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->get(), AuthItem::TYPE_ROLE);
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'roles'=>$roles, 'rules'=>$rules
+        ]);
+
 		$roles = $this->auth->getRoles();
 		$rules = $this->auth->getRules();
-		return $this->render('role', ['roles'=>$roles, 'rules'=>$rules]);
+		return $this->render('index', ['roles'=>$roles, 'rules'=>$rules]);
 	}
+
+    /**
+     * 添加角色
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new AuthItem();
+        $model->type = AuthItem::TYPE_ROLE;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $role = $this->auth->createRole($model->name);
+            !empty($model->description) && $role->description = $model->description;
+            !empty($model->rule_name) && $role->rule_name = $model->rule_name;
+            !empty($model->data) && $role->data = $model->data;
+
+            if($this->auth->add($role)){
+                return $this->redirect('index');
+            }
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->name]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
 
 	/**
 	 * @title 添加子角色
@@ -54,9 +105,9 @@ class RoleController extends SrbacController
 		foreach ($childs as $v) {
 			$child = $this->auth->getRole($v);
 			$this->auth->$m($role, $child);
-				
+
 		}
-		
+
 		$this->actionGetChild($role_name);
 	}
 
@@ -79,7 +130,7 @@ class RoleController extends SrbacController
 		$childs = [];
 		$child = '';
 		foreach ($children as $k => $v) {
-			if($v instanceof yii\rbac\Role) {
+			if($v instanceof Role) {
 				array_push($childs, $v->name);
 				$child .= sprintf($option, $v->name, $v->name);
 			}
@@ -137,15 +188,15 @@ class RoleController extends SrbacController
 		$is_sel = $request->post('is_sel');
 
 		$role = $this->auth->getRole($role_name);
-		
+
 		if (is_array($user_id)) {
 			foreach ($user_id as $k => $v) {
 				$this->auth->assign($role, $v);
 			}
 			$this->ajaxReturn(null, null, 1);
 		}
-		
-		if ($is_sel=='true') { //删除 删除 的方法 是啥 
+
+		if ($is_sel=='true') { //删除 删除 的方法 是啥
 			if ($this->auth->revoke($role, $user_id)) {
 				$this->ajaxReturn(null, null, 1);
 			}
@@ -156,10 +207,19 @@ class RoleController extends SrbacController
 		}
 	}
 
+    protected function findModel($id)
+    {
+        if (($model = AuthItem::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
 	/**
 	 * @title 添加角色
 	 */
-	public function actionCreate()
+	public function actionCreate2()
 	{
 
 		$info = $_GET['role'];
@@ -178,13 +238,15 @@ class RoleController extends SrbacController
 		!empty($info['data']) && $role->data = $info['data'];
 
 		if ($new) {
+            print_r($role);
 			if($this->auth->add($role))
 			{
-				$this->ajaxReturn(null, null, 200);
+                die;
+				//$this->ajaxReturn(null, null, 200);
 			}
 		} else {
 			if ($this->auth->update($info['name'], $role)) {
-				$this->ajaxReturn(null, null, 200);
+				//$this->ajaxReturn(null, null, 200);
 			}
 		}
 		return 0;
@@ -213,6 +275,6 @@ class RoleController extends SrbacController
 		} else {
 			$this->ajaxReturn(null, '角色不存在', 0);
 		}
-		
+
 	}
 }

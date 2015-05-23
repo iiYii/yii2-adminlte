@@ -89,8 +89,12 @@ $user = Yii::$app->user->identity;
 
         <!-- Main content -->
         <section class="content">
-            <?= \common\widgets\Alert::widget() ?>
-            <?= $content ?>
+            <div class="box box-primary">
+                <div class="box-body">
+                    <?= \common\widgets\Alert::widget() ?>
+                    <?= $content ?>
+                </div>
+            </div>
         </section><!-- /.content -->
     </div>
 

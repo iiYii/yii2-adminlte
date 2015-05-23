@@ -42,7 +42,6 @@ $(function () {
             if (xhr.status) {
                 location.reload()
             }
-            ;
         }, 'json');
     }
 
@@ -52,7 +51,7 @@ $(function () {
         var url = $('.permission').attr('href');
         var des = $(this).siblings('span').children('.action_des').val();
         createpermission(action, des, check);
-    })
+    });
 
     $('.action_des').blur(function () {
         var action = $(this).parent().siblings('input').val();
@@ -84,26 +83,23 @@ $(function () {
         } else {
             var val = $('#yet').val();
         }
-        ;
 
         $.post(url, {method: rel, action: val, _csrf: csrf, role: role}, function (xhr) {
             $('input[name=csrf]').val(xhr.csrf);
             if (xhr.status) {
                 selectRole(role);
             }
-            ;
         }, 'json');
 
     });
 
     function selectRole(role) {
-        var url = $('.permission').attr('href') + '&rolename=' + role;
+        var url = $('.permission').attr('href') + '?rolename=' + role;
         $.get(url, null, function (xhr) {
             if (xhr.status) {
                 $('#yet').html(xhr.data.yet);
                 $('#un').html(xhr.data.un);
             }
-            ;
         }, 'json');
     }
 
@@ -123,7 +119,6 @@ $(function () {
         if (user_ids.length) {
             roleAssign(user_ids, true);
         }
-        ;
     });
 
     function roleAssign(user_id, is_sel) {
@@ -141,7 +136,49 @@ $(function () {
                     $('li[data-user_id=' + user_id + ']').toggleClass('selected');
                 }
             }
-            ;
         }, 'json');
     }
+
+    //$(function(){
+    //    $('#roleselect').change(function(){
+    //        var role = $(this).val();
+    //        selectRole(role)
+    //    });
+    //
+    //    $('.handel').click(function(){
+    //        var rel = $(this).attr('rel');
+    //        var url = $('.role-child').attr('href');
+    //        var role = $('#roleselect').val();
+    //        var csrf = $('input[name=csrf]').val();
+    //        if (rel=='add') {
+    //            var val = $('#other').val();
+    //        } else {
+    //            var val = $('#child').val();
+    //        };
+    //
+    //        $.post(url, {method:rel, _csrf:csrf, child:val,role:role}, function(xhr){
+    //            $('input[name=csrf]').val(xhr.csrf);
+    //            if (xhr.status) {
+    //                selectRole(role);
+    //            };
+    //        }, 'json');
+    //        // $.post(url, {method:rel, child:child, _csrf:csrf, role:role}, function(xhr){
+    //        //     // $('input[name=csrf]').val(xhr.csrf);
+    //        //     // if (xhr.status) {
+    //        //     //     selectRole(role);
+    //        //     // };
+    //        // },'json');
+    //
+    //    });
+    //});
+    //
+    //function selectRole(role){
+    //    var url = $('.get-child').attr('href')+'&rolename='+role;
+    //    $.get(url, null, function(xhr){
+    //        if (xhr.status) {
+    //            $('#child').html(xhr.data.child);
+    //            $('#other').html(xhr.data.other);
+    //        };
+    //    },'json');
+    //}
 });

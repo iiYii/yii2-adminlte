@@ -9,30 +9,12 @@ use yii\helpers\Url;
  */
 
 $this->title = '用户角色管理';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<div class="breadcrumbs" id="breadcrumbs">
-    <ul class="breadcrumb">
-    	<li>
-            <a href="<?=Url::to(['default/index'])?>" class='btn btn-info btn-xs'>管理授权项</a>
-            <a href="<?=Url::to(['default/assign'])?>" class='btn btn-info btn-xs'>分配授权</a>
-            <a href="<?=Url::to(['role/index'])?>" class='btn btn-info btn-xs'>角色管理</a>
-        </li>
-    </ul><!-- /.breadcrumb -->
-    <!-- /section:basics/content.searchbox -->
-</div>
 <div class="page-content">
 	<!-- /section:settings.box -->
 	<div class="page-content-area">
-		<div class="page-header">
-			<h1>
-                <?= Html::encode($this->title) ?>
-				<small>
-					<i class="ace-icon fa fa-angle-double-right"></i>
-					选择用户时，用户名底色变化之后表示已选中
-				</small>
-			</h1>
-		</div><!-- /.page-header -->
+		<p>选择用户时，用户名底色变化之后表示已选中</p>
 
 		<div class="row">
     		<div class="col-xs-12">

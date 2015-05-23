@@ -5,7 +5,7 @@
  * description: 
  */
 
-namespace backend\assets;
+namespace backend\modules\srbac\assets;
 
 use yii\web\AssetBundle;
 
@@ -14,7 +14,7 @@ class SrbacAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/common.css',
+        //'css/common.css',
     ];
     public $js = [
         'js/srbac.js'

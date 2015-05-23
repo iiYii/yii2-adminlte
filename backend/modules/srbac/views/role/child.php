@@ -3,24 +3,11 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 $this->title = '添加子角色';
+$this->params['breadcrumbs'][] = ['label' => '管理授权项', 'url' => ['default/index']];
+$this->params['breadcrumbs'][] = ['label' => '分配授权', 'url' => ['default/assign']];
+$this->params['breadcrumbs'][] = ['label' => '角色管理', 'url' => ['role/index']];
+//$this->params['breadcrumbs'][] = 'Update';
 ?>
-
-<div class="breadcrumbs" id="breadcrumbs">
-    <script type="text/javascript">
-        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){ }
-    </script>
-
-    <ul class="breadcrumb">
-        <li>
-            <a href="<?=Url::to(['default/index'])?>" class='btn btn-info btn-xs'>管理授权项</a>
-            <a href="<?=Url::to(['default/assign'])?>" class='btn btn-info btn-xs'>分配授权</a>
-            <a href="<?=Url::to(['role/index'])?>" class='btn btn-info btn-xs'>角色管理</a>
-        </li>
-    </ul><!-- /.breadcrumb -->
-
-    <!-- /section:basics/content.searchbox -->
-</div>
-
 <div class="page-content">
     <!-- /section:settings.box -->
     <div class="page-content-area">
@@ -92,47 +79,3 @@ $this->title = '添加子角色';
     <a href="<?=Url::toRoute('/srbac/role/get-child');?>" class="get-child"></a>
     <input name='csrf' value="<?=Yii::$app->request->getCsrfToken()?>">
 </div>
-<script type="text/javascript">
-$(function(){
-    $('#roleselect').change(function(){
-        var role = $(this).val();
-        selectRole(role)
-    });
-
-    $('.handel').click(function(){
-        var rel = $(this).attr('rel');
-        var url = $('.role-child').attr('href');
-        var role = $('#roleselect').val();
-        var csrf = $('input[name=csrf]').val();
-        if (rel=='add') {
-            var val = $('#other').val();
-        } else {
-            var val = $('#child').val();
-        };
-
-        $.post(url, {method:rel, _csrf:csrf, child:val,role:role}, function(xhr){
-        	$('input[name=csrf]').val(xhr.csrf);
-            if (xhr.status) {
-                selectRole(role);
-            };
-        }, 'json');
-        // $.post(url, {method:rel, child:child, _csrf:csrf, role:role}, function(xhr){
-        //     // $('input[name=csrf]').val(xhr.csrf);
-        //     // if (xhr.status) {
-        //     //     selectRole(role);
-        //     // };
-        // },'json');
-
-    });
-});
-
-function selectRole(role){
-    var url = $('.get-child').attr('href')+'&rolename='+role;
-    $.get(url, null, function(xhr){
-        if (xhr.status) {
-            $('#child').html(xhr.data.child);
-            $('#other').html(xhr.data.other);
-        };
-    },'json');
-}
-</script>

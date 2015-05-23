@@ -8,6 +8,7 @@ use yii\web\BadRequestHttpException;
 
 class SrbacModule extends Module
 {
+    public $layout = 'column';
 	public function init()
 	{
 		parent::init();

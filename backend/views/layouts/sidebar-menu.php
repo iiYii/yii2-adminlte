@@ -47,7 +47,7 @@ echo Menu::widget(
                         'icon' => 'fa fa-user',
                     ],
                     [
-                        'label' => Yii::t('app', 'Add Role'),
+                        'label' => Yii::t('app', 'Role Manage'),
                         'url' => ['/srbac/role/index'],
                         'icon' => 'fa fa-lock',
                     ],

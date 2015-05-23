@@ -4,21 +4,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = '权限管理';
-\backend\assets\SrbacAsset::register($this);
 ?>
 <div class="page-content">
     <!-- /section:settings.box -->
     <div class="page-content-area">
-        <div class="page-header">
-            <h1>
-                <?= Html::encode($this->title) ?>
-                <small>
-                    <i class="ace-icon fa fa-angle-double-right"></i>
-                    在此列表可以对用户进行修改、删除等操作
-                </small>
-            </h1>
-
-        </div><!-- /.page-header -->
 
         <div class="btn-group pull-right">
             <a href="<?=Url::to(['default/index'])?>" class='btn btn-info btn-sm'>管理授权项</a>
@@ -69,4 +58,4 @@ $this->title = '权限管理';
 
 <div class="urls hidden">
     <a href="<?=Url::toRoute('/srbac/default/create-permission');?>" class="permission"></a>
-</div><?php \backend\assets\SrbacAsset::register($this);?>
+</div>

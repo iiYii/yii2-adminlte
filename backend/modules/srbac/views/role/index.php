@@ -9,32 +9,11 @@ use yii\helpers\Url;
  */
 
 $this->title = '角色管理';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<div class="breadcrumbs" id="breadcrumbs">
-
-
-    <ul class="breadcrumb">
-
-    	<li>
-            <a href="#modal-form" role="button" class="blue btn btn-success btn-xs" data-toggle="modal"> 添加角色 </a>
-        </li>
-    </ul><!-- /.breadcrumb -->
-    <!-- /section:basics/content.searchbox -->
-</div>
 <div class="page-content">
-	<!-- /section:settings.box -->
-	<div class="page-content-area">
-		<div class="page-header">
-			<h1>
-                <?= Html::encode($this->title) ?>
-				<small>
-					<i class="ace-icon fa fa-angle-double-right"></i>
-					角色列表
-				</small>
-			</h1>
-		</div><!-- /.page-header -->
 
+	<div class="page-content-area">
         <div class="btn-group pull-right">
             <a href="<?=Url::to(['default/index'])?>" class='btn btn-info btn-sm'>管理授权项</a>
             <a href="<?=Url::to(['default/assign'])?>" class='btn btn-info btn-sm'>分配授权</a>
@@ -48,7 +27,56 @@ $this->title = '角色管理';
             <p class="text-danger">4.为用户授权,在角色管理页面选择对应的角色行的"选择用户"。</p>
         </div>
 
-		<div class="row">
+        <p>
+            <a href="#modal-form" role="button" class="blue btn btn-danger btn-minier" data-toggle="modal"> 添加角色 </a>
+            <?= Html::a(Yii::t('app', 'Create Role'), ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+
+        <?= \yii\grid\GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+                'name',
+                'description',
+                [
+                    'header' => Yii::t('app', 'Actions'),
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{view} {update} {delete} {config} {add-child}',
+                    'buttons'=>[
+                        'config'=>function ($url, $model) {
+                            $customurl=Yii::$app->getUrlManager()->createUrl(['log/view']);
+                            return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $customurl,
+                                ['title' => Yii::t('yii', 'View'), 'data-pjax' => '0']);
+                        }
+                    ],
+                    //'urlCreator' => function ($action, $model, $key, $index) {
+                    //    $link = '#';
+                    //    switch ($action) {
+                    //        case 'view':
+                    //            $link = Yii::$app->getUrlManager()->createUrl(['role/view', 'name' => $model->name]);
+                    //            break;
+                    //        case 'update':
+                    //            $link = Yii::$app->getUrlManager()->createUrl(['role/update', 'name' => $model->name]);
+                    //            break;
+                    //        case 'delete':
+                    //            $link = Yii::$app->getUrlManager()->createUrl(['role/delete', 'name' => $model->name]);
+                    //            break;
+                    //        case 'config':
+                    //            $link = Yii::$app->getUrlManager()->createUrl(['role/delete', 'name' => $model->name]);
+                    //            break;
+                    //        case 'add-child':
+                    //            $link = Yii::$app->getUrlManager()->createUrl(['role/delete', 'name' => $model->name]);
+                    //            break;
+                    //    }
+                    //    return $link;
+                    //},
+                ],
+                //['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]); ?>
+
+        <div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
@@ -244,4 +272,3 @@ $this->title = '角色管理';
 <div class="urls hidden">
     <a href="<?=Url::toRoute('/srbac/role/create');?>" class="create-role"></a>
 </div>
-<?php \backend\assets\SrbacAsset::register($this);?>
