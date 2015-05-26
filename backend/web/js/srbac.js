@@ -68,15 +68,15 @@ $(function () {
     }
 
 
-    $('#roleselect').change(function () {
+    $('.assign #role-select').change(function () {
         var role = $(this).val();
-        selectRole(role)
+        assignPermission(role)
     });
 
     $('.handel').click(function () {
         var rel = $(this).attr('rel');
         var url = $('.assign-permission').attr('href');
-        var role = $('#roleselect').val();
+        var role = $('.assign #role-select').val();
         var csrf = $('input[name=csrf]').val();
         if (rel == 'add') {
             var val = $('#un').val();
@@ -87,13 +87,13 @@ $(function () {
         $.post(url, {method: rel, action: val, _csrf: csrf, role: role}, function (xhr) {
             $('input[name=csrf]').val(xhr.csrf);
             if (xhr.status) {
-                selectRole(role);
+                assignPermission(role);
             }
         }, 'json');
 
     });
 
-    function selectRole(role) {
+    function assignPermission(role) {
         var url = $('.permission').attr('href') + '?rolename=' + role;
         $.get(url, null, function (xhr) {
             if (xhr.status) {
@@ -139,46 +139,46 @@ $(function () {
         }, 'json');
     }
 
-    //$(function(){
-    //    $('#roleselect').change(function(){
-    //        var role = $(this).val();
-    //        selectRole(role)
-    //    });
-    //
-    //    $('.handel').click(function(){
-    //        var rel = $(this).attr('rel');
-    //        var url = $('.role-child').attr('href');
-    //        var role = $('#roleselect').val();
-    //        var csrf = $('input[name=csrf]').val();
-    //        if (rel=='add') {
-    //            var val = $('#other').val();
-    //        } else {
-    //            var val = $('#child').val();
-    //        };
-    //
-    //        $.post(url, {method:rel, _csrf:csrf, child:val,role:role}, function(xhr){
-    //            $('input[name=csrf]').val(xhr.csrf);
-    //            if (xhr.status) {
-    //                selectRole(role);
-    //            };
-    //        }, 'json');
-    //        // $.post(url, {method:rel, child:child, _csrf:csrf, role:role}, function(xhr){
-    //        //     // $('input[name=csrf]').val(xhr.csrf);
-    //        //     // if (xhr.status) {
-    //        //     //     selectRole(role);
-    //        //     // };
-    //        // },'json');
-    //
-    //    });
-    //});
-    //
-    //function selectRole(role){
-    //    var url = $('.get-child').attr('href')+'&rolename='+role;
-    //    $.get(url, null, function(xhr){
-    //        if (xhr.status) {
-    //            $('#child').html(xhr.data.child);
-    //            $('#other').html(xhr.data.other);
-    //        };
-    //    },'json');
-    //}
+    $(function(){
+        $('.child #role-select').change(function(){
+            var role = $(this).val();
+            selectRole(role)
+        });
+
+        $('.handel').click(function(){
+            var rel = $(this).attr('rel');
+            var url = $('.role-child').attr('href');
+            var role = $('.child #role-select').val();
+            var csrf = $('input[name=csrf]').val();
+            if (rel=='add') {
+                var val = $('#other').val();
+            } else {
+                var val = $('#child').val();
+            };
+
+            $.post(url, {method:rel, _csrf:csrf, child:val,role:role}, function(xhr){
+                $('input[name=csrf]').val(xhr.csrf);
+                if (xhr.status) {
+                    selectRole(role);
+                };
+            }, 'json');
+            // $.post(url, {method:rel, child:child, _csrf:csrf, role:role}, function(xhr){
+            //     // $('input[name=csrf]').val(xhr.csrf);
+            //     // if (xhr.status) {
+            //     //     selectRole(role);
+            //     // };
+            // },'json');
+
+        });
+    });
+
+    function selectRole(role){
+        var url = $('.get-child').attr('href')+'?rolename='+role;
+        $.get(url, null, function(xhr){
+            if (xhr.status) {
+                $('#child').html(xhr.data.child);
+                $('#other').html(xhr.data.other);
+            };
+        },'json');
+    }
 });

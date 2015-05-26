@@ -3,6 +3,8 @@
 namespace backend\modules\srbac\models;
 
 use Yii;
+use yii\base\Exception;
+use yii\base\InvalidValueException;
 
 /**
  * This is the model class for table "auth_item".
@@ -81,34 +83,46 @@ class AuthItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * 添加角色
+     * @return bool
+     * @throws Exception
      */
-    public function getAuthAssignments()
+    public function createRole()
     {
-        return $this->hasMany(AuthAssignment::className(), ['item_name' => 'name']);
+        if ($this->validate()) {
+            $auth = Yii::$app->getAuthManager();
+            $role = $auth->createRole($this->name);
+            $role->description = $this->description;
+            $role->ruleName = $this->rule_name;
+            $role->data = $this->data;
+
+            if ($auth->add($role)) {
+                return true;
+            }
+        }
+
+        throw new InvalidValueException(array_values($this->getFirstErrors())[0]);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * 更新角色
+     * @param $name
+     * @return bool
+     * @throws Exception
      */
-    public function getRuleName()
+    public function updateRole($name)
     {
-        return $this->hasOne(AuthRule::className(), ['name' => 'rule_name']);
-    }
+        if ($this->validate()) {
+            $auth = Yii::$app->getAuthManager();
+            $role = $auth->getRole($name);
+            $role->description = $this->description;
+            $role->ruleName = $this->rule_name;
+            $role->data = $this->data;
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAuthItemChildren()
-    {
-        return $this->hasMany(AuthItemChild::className(), ['parent' => 'name']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAuthItemChildren0()
-    {
-        return $this->hasMany(AuthItemChild::className(), ['child' => 'name']);
+            if ($auth->update($name, $role)) {
+                return true;
+            }
+        }
+        throw new InvalidValueException(array_values($this->getFirstErrors())[0]);
     }
 }

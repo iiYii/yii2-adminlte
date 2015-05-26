@@ -52,7 +52,7 @@ echo Menu::widget(
                         'icon' => 'fa fa-lock',
                     ],
                     [
-                        'label' => Yii::t('app', 'Role'),
+                        'label' => Yii::t('app', 'Permissions Manage'),
                         'url' => ['/srbac/default/assign'],
                         'icon' => 'fa fa-lock',
                     ],
