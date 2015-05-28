@@ -54,13 +54,12 @@ class RoleController extends SrbacController
             if ($model->createRole()) {
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Create role success'));
                 return $this->redirect('index');
-                //return $this->redirect(['view', 'name' => $model->name]);
             }
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -78,12 +77,11 @@ class RoleController extends SrbacController
                 Yii::$app->session->setFlash('success', " '$model->name' " . Yii::t('app', 'successfully updated'));
                 return $this->redirect(['view', 'name' => $name]);
             }
-        } else {
-            return $this->render('update', [
-                    'model' => $model,
-                ]
-            );
         }
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+
     }
 
 
@@ -95,7 +93,7 @@ class RoleController extends SrbacController
     public function actionView($name)
     {
         return $this->render('view', [
-            'model' => $this->findModel($name),
+            'model' => $this->findRole($name),
         ]);
     }
 

@@ -10,6 +10,7 @@ use yii\helpers\Url;
  */
 
 $this->title = Yii::t('app', 'Permissions Manage');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="page-content-area assign">

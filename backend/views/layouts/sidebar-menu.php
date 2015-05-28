@@ -42,7 +42,7 @@ echo Menu::widget(
                 ],
                 'items' => [
                     [
-                        'label' => Yii::t('app', 'Rights'),
+                        'label' => Yii::t('app', 'Permissions List'),
                         'url' => ['/srbac'],
                         'icon' => 'fa fa-user',
                     ],

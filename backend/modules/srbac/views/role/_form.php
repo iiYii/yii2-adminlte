@@ -18,8 +18,8 @@ use yii\widgets\ActiveForm;
 <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
 <?= $form->field($model, 'rule_name')->dropDownList(
-    Yii::$app->authManager->getRules()
-    //['prompt' => '无']
+    Yii::$app->authManager->getRules(),
+    ['prompt' => '无']
 ) ?>
 
 <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>

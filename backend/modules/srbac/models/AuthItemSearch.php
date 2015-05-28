@@ -12,6 +12,7 @@ use backend\modules\srbac\models\AuthItem;
  */
 class AuthItemSearch extends AuthItem
 {
+    public $item;
     /**
      * @inheritdoc
      */
@@ -31,6 +32,16 @@ class AuthItemSearch extends AuthItem
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
+
+    //protected function setItemAttributes()
+    //{
+    //    Yii::configure($this->item, [
+    //        'name' => $this->name,
+    //        'description' => $this->description,
+    //        'ruleName' => $this->ruleName,
+    //        'data' => $this->data
+    //    ]);
+    //}
 
     /**
      * Creates data provider instance with search query applied

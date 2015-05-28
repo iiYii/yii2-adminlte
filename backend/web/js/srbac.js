@@ -45,18 +45,19 @@ $(function () {
         }, 'json');
     }
 
-    $('.action').click(function (e) {
+    $('.action').click(function(e){
         var action = $(this).val();
         var check = $(this).is(":checked");
-        var url = $('.permission').attr('href');
-        var des = $(this).siblings('span').children('.action_des').val();
+        var url= $('.permission').attr('href');
+        var des = $(this).parent('span').prev('.action_des').val();
         createpermission(action, des, check);
     });
 
     $('.action_des').blur(function () {
-        var action = $(this).parent().siblings('input').val();
+        var action = $(this).next().find('input').val();
+        //console.log(action);
         var des = $(this).val();
-        $(this).parent().siblings('input').attr('checked', 'checked');
+        $(this).next().find('input').attr('checked', 'checked');
         createpermission(action, des, true);
     });
 
