@@ -34,7 +34,7 @@ echo Menu::widget(
                 ],
             ],
             [
-                'label' => Yii::t('app', 'System'),
+                'label' => Yii::t('app', 'RBAC'),
                 'url' => ['#'],
                 'icon' => 'fa fa-cog',
                 'options' => [
@@ -42,15 +42,24 @@ echo Menu::widget(
                 ],
                 'items' => [
                     [
-                        'label' => Yii::t('app', 'User'),
-                        'url' => ['/user/index'],
+                        'label' => Yii::t('app', 'Permissions List'),
+                        'url' => ['/srbac'],
                         'icon' => 'fa fa-user',
-                        //'visible' => (Yii::$app->user->identity->username == 'admin'),
                     ],
                     [
-                        'label' => Yii::t('app', 'Role'),
-                        'url' => ['/role/index'],
-                        'icon' => 'fa fa-lock',
+                        'label' => Yii::t('app', 'Role Manage'),
+                        'url' => ['/srbac/role/index'],
+                        'icon' => 'fa fa-user',
+                    ],
+                    [
+                        'label' => Yii::t('app', 'Assign permissions'),
+                        'url' => ['/srbac/default/assign'],
+                        'icon' => 'fa fa-user',
+                    ],
+                    [
+                        'label' => Yii::t('app', 'Assign Child Role'),
+                        'url' => ['/srbac/role/child'],
+                        'icon' => 'fa fa-user',
                     ],
                 ],
             ],
