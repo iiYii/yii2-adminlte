@@ -2,11 +2,8 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-$this->title = '添加子角色';
-$this->params['breadcrumbs'][] = ['label' => '管理授权项', 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = ['label' => '分配授权', 'url' => ['default/assign']];
-$this->params['breadcrumbs'][] = ['label' => '角色管理', 'url' => ['role/index']];
-//$this->params['breadcrumbs'][] = 'Update';
+$this->title = Yii::t('app', 'Assign Child Role');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="page-content-area child">
@@ -39,6 +36,7 @@ $this->params['breadcrumbs'][] = ['label' => '角色管理', 'url' => ['role/ind
                 </div>
                 <div class="panel-body">
                     <div class="col-sm-5">
+                        <p>已分配的角色</p>
                         <select class="form-control" id="child" multiple="multiple" size='22'>
 
                         </select>
@@ -50,6 +48,7 @@ $this->params['breadcrumbs'][] = ['label' => '角色管理', 'url' => ['role/ind
                         </div>
                     </div>
                     <div class="col-sm-6">
+                        <p>未分配的角色</p>
                         <select class="form-control" id="other" multiple="multiple" size='22'>
 
                         </select>

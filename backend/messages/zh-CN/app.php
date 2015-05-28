@@ -39,10 +39,12 @@ return [
 
     'System' => '系统',
     'Settings' => '设置',
+    'Setting' => '设置',
     'User' => '用户',
     'Users' => '用户',
     'RBAC' => '权限系统',
-    'Rights' => '权限管理',
+    'Assign Child Role' => '分配子角色',
+    'Assign User' => '分配用户',
     'Role Manage' => '角色管理',
     'Role Items' => '角色列表',
     'Role' => '角色',

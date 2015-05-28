@@ -32,15 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'updated_at:datetime',
                 [
                     'header'     => Yii::t('app', 'Actions'),
-                    'class'      => 'yii\grid\ActionColumn',
-                    'template'   => '{view} {update} {delete} {config} {add-child}',
-                    'buttons'    => [
-                        'config' => function ($url, $model) {
-                            $customurl = Yii::$app->getUrlManager()->createUrl(['log/view']);
-                            return \yii\helpers\Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $customurl,
-                                ['title' => Yii::t('yii', 'View'), 'data-pjax' => '0']);
-                        }
-                    ],
+                    'class'      => 'backend\modules\srbac\widgets\ActionColumn',
+                    'template'   => '{view} {update} {assign-user} {delete}',
                     'urlCreator' => function ($action, $model, $key, $index) {
                         $link = '#';
                         switch ($action) {
@@ -53,17 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             case 'delete':
                                 $link = Yii::$app->getUrlManager()->createUrl(['/srbac/role/delete', 'name' => $model->name]);
                                 break;
-                            case 'config':
-                                $link = Yii::$app->getUrlManager()->createUrl(['/srbac/role/delete', 'name' => $model->name]);
-                                break;
-                            case 'add-child':
-                                $link = Yii::$app->getUrlManager()->createUrl(['/srbac/role/delete', 'name' => $model->name]);
+                            case 'assign-user':
+                                $link = Yii::$app->getUrlManager()->createUrl(['/srbac/role/user', 'name' => $model->name]);
                                 break;
                         }
                         return $link;
                     },
                 ],
-                //['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>
 

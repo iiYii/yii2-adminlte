@@ -49,12 +49,17 @@ echo Menu::widget(
                     [
                         'label' => Yii::t('app', 'Role Manage'),
                         'url' => ['/srbac/role/index'],
-                        'icon' => 'fa fa-lock',
+                        'icon' => 'fa fa-user',
                     ],
                     [
-                        'label' => Yii::t('app', 'Permissions Manage'),
+                        'label' => Yii::t('app', 'Assign permissions'),
                         'url' => ['/srbac/default/assign'],
-                        'icon' => 'fa fa-lock',
+                        'icon' => 'fa fa-user',
+                    ],
+                    [
+                        'label' => Yii::t('app', 'Assign Child Role'),
+                        'url' => ['/srbac/role/child'],
+                        'icon' => 'fa fa-user',
                     ],
                 ],
             ],

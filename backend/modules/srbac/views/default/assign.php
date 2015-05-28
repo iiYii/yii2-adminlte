@@ -9,7 +9,8 @@ use yii\helpers\Url;
  * @var common\models\SearchUser $searchModel
  */
 
-$this->title = Yii::t('app', 'Permissions Manage');
+$this->title = Yii::t('app', 'Assign permissions');
+$this->params['breadcrumbs'][] = ['label' => '角色管理', 'url' => ['role/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

@@ -8,7 +8,8 @@ use yii\helpers\Url;
  * @var common\models\SearchUser $searchModel
  */
 
-$this->title = '用户角色管理';
+$this->title = Yii::t('app', 'Assign User');
+$this->params['breadcrumbs'][] = ['label' => '角色管理', 'url' => ['role/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-content">
@@ -26,11 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
 					    	<?=$val['username']?>
 					    </li>
 					    <?php endforeach;?>
-					    <div style="clear:both"></div>
+					    <div class="clearfix"></div>
 					</ul>
 				<?php endforeach;?>
             <input type="hidden" name='csrf' value="<?=Yii::$app->request->getCsrfToken()?>">
-            <input type="hidden" name="role_name" value="<?=Yii::$app->request->get('role_name');?>">
+            <input type="hidden" name="role_name" value="<?=Yii::$app->request->get('name');?>">
 		</div>
 </div>
 	</div><!-- /.page-content-area -->

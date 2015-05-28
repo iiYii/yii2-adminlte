@@ -33,13 +33,7 @@ class RoleController extends SrbacController
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel'  => $searchModel,
-            'roles'        => Yii::$app->authManager->getRoles(),
-            'rules'        => Yii::$app->authManager->getRules()
         ]);
-
-        $roles = $this->auth->getRoles();
-        $rules = $this->auth->getRules();
-        return $this->render('index', ['roles' => $roles, 'rules' => $rules]);
     }
 
     /**
@@ -174,7 +168,7 @@ class RoleController extends SrbacController
     /**
      * @title 角色下的 所有用户
      */
-    public function actionUser($role_name)
+    public function actionUser($name)
     {
 
         $users = User::find()->where(['status' => 10])
@@ -187,7 +181,7 @@ class RoleController extends SrbacController
             $users_info[$pin][$v['id']] = [
                 'username' => $v['username'],
                 'pinyin'   => Pinyin::pinyin($v['username']),
-                'is_sel'   => $this->auth->getAssignment($role_name, $v['id']) ? 1 : 0
+                'is_sel'   => $this->auth->getAssignment($name, $v['id']) ? 1 : 0
             ];
         }
 
