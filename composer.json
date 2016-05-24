@@ -37,7 +37,10 @@
         "process-timeout": 1800
     },
     "autoload": {
-        "psr-4": { "common\\": "common" }
+        "psr-4": { "common\\": "common" },
+        "files": [
+            "common/components/GlobalFunctions.php"
+        ]
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -55,14 +58,5 @@
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
         }
-    },
-    "repositories": [
-        {
-            "packagist": false
-        },
-        {
-            "type": "composer",
-            "url": "http://composer-proxy.jp/proxy/packagist"
-        }
-    ]
+    }
 }
